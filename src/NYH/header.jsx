@@ -2,9 +2,9 @@ import React from "react";
 import { Layout, Menu, Dropdown } from "antd";
 import Biji from "./biji";
 import Home from "./home";
+import "./index.css";
 
 // 刘洋
-import Loop from "../LY/child/loop";
 import Footer from "../LY/child/footer";
 
 const { Header } = Layout;
@@ -17,7 +17,7 @@ export default class header extends React.Component {
     let hash = window.location.hash.substr(1);
 
     this.state = {
-      page: hash || "fcpxziyuan"
+      page: hash || "home"
     };
 
     // 常量值
@@ -29,6 +29,8 @@ export default class header extends React.Component {
 
   // 改变state值
   changeState = name => {
+    console.log(name);
+
     // 修改state值
     this.setState({
       page: name
@@ -79,7 +81,8 @@ export default class header extends React.Component {
             style={{
               position: "fixed",
               zIndex: 1,
-              width: "100%"
+              width: "100%",
+              boxShadow: "0px 0px 10px gray"
             }}
             className="nyh-header"
           >
@@ -94,17 +97,17 @@ export default class header extends React.Component {
                 lineHeight: "64px"
               }}
             >
-              <Menu.Item key="1">
-                <div onClick={() => this.changeState(Home)}>首页</div>
+              <Menu.Item key="1" onClick={() => this.changeState(Home)}>
+                <a className="ant-dropdown-link" href="#">
+                  首页
+                </a>
               </Menu.Item>
-              <Menu.Item key="2">
+              <Menu.Item key="2" onClick={() => this.changeState(Biji)}>
                 <Dropdown overlay={menu}>
-                  <div onClick={() => this.changeState(Biji)}>
-                    <a className="ant-dropdown-link" href="#">
-                      笔记
-                      {/* <Icon type="down" /> */}
-                    </a>
-                  </div>
+                  <a className="ant-dropdown-link" href="#">
+                    笔记
+                    {/* <Icon type="down" /> */}
+                  </a>
                 </Dropdown>
               </Menu.Item>
             </Menu>
